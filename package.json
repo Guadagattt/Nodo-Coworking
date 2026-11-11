@@ -1,0 +1,19 @@
+{
+  "name": "poc-nodo-coworking",
+  "version": "1.0.0",
+  "description": "PoC: disponibilidad de salas de reuniones - Nodo Coworking",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
