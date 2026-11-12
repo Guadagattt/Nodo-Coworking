@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "PoC: disponibilidad de salas de reuniones - Nodo Coworking",
   "scripts": {
-    "dev": "ts-node src/index.ts",
-    "build": "tsc",
+    "postinstall": "npm --prefix frontend install",
+    "dev": "concurrently -k -n api,web -c green,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "ts-node src/index.ts",
+    "dev:web": "npm --prefix frontend run dev",
+    "build": "tsc && npm --prefix frontend run build",
     "start": "node dist/index.js"
   },
   "dependencies": {
@@ -13,6 +16,7 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.0",
+    "concurrently": "^10.0.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

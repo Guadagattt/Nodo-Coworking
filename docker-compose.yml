@@ -1,0 +1,36 @@
+# Desarrollo local: docker compose up --build --watch
+# Web: http://localhost:5173 · API: http://localhost:3000
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: ./package.json
+
+  web:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      API_URL: http://api:3000
+    depends_on:
+      - api
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+        - action: sync+restart
+          path: ./frontend/vite.config.ts
+          target: /app/vite.config.ts
+        - action: sync
+          path: ./frontend/index.html
+          target: /app/index.html
+        - action: rebuild
+          path: ./frontend/package.json
